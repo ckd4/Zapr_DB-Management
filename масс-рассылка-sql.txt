@@ -1,0 +1,16 @@
+use baza
+	create table Email(email nvarchar(50) primary key)
+	
+	insert into Email(email)
+	values
+	('bogdantankist04@gmail.com'),
+	('yodipak798@v2ssr.com')
+
+	DECLARE @copy_to varchar(max) = (SELECT STRING_AGG (CONVERT(NVARCHAR(max),email), ';') AS csv 
+FROM Email)
+
+EXEC msdb.dbo.sp_send_dbmail
+    @profile_name = 'pepegaMail', 
+    @recipients = @copy_to,
+    @body = 'AAAAAAAAAAAA' ,
+    @subject ='AAAAA' 
